@@ -64,6 +64,80 @@ String & String::DelCharAt(size_t pos)
 	return *this;
 }
 
+String & String::operator=(const String & str)
+{
+	char*tmp;
+	this->length = str.length;
+	tmp = new char[this->length+1];
+
+	for (int i = 0;i < length;i++)
+		tmp[i] = str.m_stringRep[i];
+	tmp[length] = '\0';
+	delete[] this->m_stringRep;
+	m_stringRep = tmp;
+	return*this;
+}
+
+String & String::ConcatStr(const String & str)
+{
+	char*tmp;
+	int tmp_length;
+	tmp_length = length + str.length;
+	tmp = new char[tmp_length+1];
+
+	for (int i = 0;i < length;i++)
+		tmp[i] = this->m_stringRep[i];
+	for (int i = 0;i < str.length;i++)
+		tmp[length + i] = str.m_stringRep[i];
+	tmp[tmp_length] = '\0';
+	delete[] this->m_stringRep;
+	m_stringRep = tmp;
+	length = tmp_length;
+	return*this;	
+}
+
+String & String::ConcatStr(const char * str)
+{
+	char*tmp;
+	int tmp_length;
+	tmp_length = length + strlen(str);
+	tmp = new char[tmp_length + 1];
+
+	for (int i = 0;i < length;i++)
+		tmp[i] = this->m_stringRep[i];
+	for (int i = 0;i < strlen(str);i++)
+		tmp[length + i] = str[i];
+	tmp[tmp_length] = '\0';
+	delete[] this->m_stringRep;
+	m_stringRep = tmp;
+	length = tmp_length;
+	return*this;
+}
+
+String & String::operator+(const String & str)
+{
+	char*tmp;
+	int tmp_length;
+	tmp_length = length + str.length;
+	tmp = new char[tmp_length + 1];
+
+	for (int i = 0;i < length;i++)
+		tmp[i] = this->m_stringRep[i];
+	for (int i = 0;i < str.length;i++)
+		tmp[length + i] = str.m_stringRep[i];
+	tmp[tmp_length] = '\0';
+	delete[] this->m_stringRep;
+	m_stringRep = tmp;
+	length = tmp_length;
+	return*this;
+}
+
+String & String::operator+(const char * str)
+{
+	ConcatStr(str);
+	return*this;
+}
+
 void String::operator()(const char * str)
 {
 	for (int i = 0;i < strlen(str);i++)

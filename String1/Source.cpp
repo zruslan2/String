@@ -13,6 +13,13 @@ int main()
 	cout << s2.getStrRep() << endl;
 	s2.DelCharAt(2);
 	cout << s2.getStrRep() << endl;
-	system("pause");
+	s.ConcatStr(" World");
+	cout << s.getStrRep() << endl;
+	s + s1;
+	cout << s.getStrRep() << endl;
+	s1 + "Hel";
+	cout << s1.getStrRep() << endl;
+
+	system("pause");	
 	return 0;
 }
