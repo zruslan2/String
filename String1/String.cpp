@@ -138,6 +138,29 @@ String & String::operator+(const char * str)
 	return*this;
 }
 
+String & String::AddStrAt(const String & str, size_t pos)
+{
+	int tmp_length= length + str.length;
+	char*tmp=new char[tmp_length + 1];
+	tmp[tmp_length] = '\0';
+
+		for (int i = 0;i < pos;i++)
+			tmp[i] = this->m_stringRep[i];
+		for (int i = 0;i < str.length;i++)
+			tmp[pos + i] = str.m_stringRep[i];
+		for (int i = pos;i < this->length;i++)
+			tmp[i + str.length] = this->m_stringRep[i];
+		this->length = tmp_length;
+		delete[] this->m_stringRep;
+		this->m_stringRep = tmp;
+	return*this;
+}
+
+//String & String::AddStrAt(const char * str, size_t pos)
+//{
+//	
+//}
+
 void String::operator()(const char * str)
 {
 	for (int i = 0;i < strlen(str);i++)

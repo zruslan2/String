@@ -19,6 +19,8 @@ public:
 	String& ConcatStr(const char* str);
 	String& operator+(const String &str);
 	String& operator+(const char* str);
+	String& AddStrAt(const String& str, size_t pos);
+	String& AddStrAt(const char* str, size_t pos);
 
 	void operator()(const char* str);
 

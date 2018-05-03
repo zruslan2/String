@@ -3,7 +3,10 @@
 int main()
 {
 	String s("Hello");
-	String s1(5, 'a');
+	String s5("test");
+	s.AddStrAt(s5, 1);
+	cout << s.getStrRep() << endl;
+	/*String s1(5, 'a');
 	String s2(5);
 	cout << s.getStrRep() << endl;
 	cout << s1.getStrRep() << endl;
@@ -19,7 +22,8 @@ int main()
 	cout << s.getStrRep() << endl;
 	s1 + "Hel";
 	cout << s1.getStrRep() << endl;
-
+	s1.AddStrAt(s2, 2);
+	cout << s1.getStrRep() << endl;*/
 	system("pause");	
 	return 0;
 }
