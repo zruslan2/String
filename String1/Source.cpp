@@ -6,6 +6,9 @@ int main()
 	String s5("test");
 	s.AddStrAt(s5, 1);
 	cout << s.getStrRep() << endl;
+	s.AddStrAt(" ", 1);
+	cout << s.getStrRep() << endl;
+	cout << String::Format("Is %d", 10).getStrRep() << endl;
 	/*String s1(5, 'a');
 	String s2(5);
 	cout << s.getStrRep() << endl;

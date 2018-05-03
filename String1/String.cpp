@@ -156,10 +156,80 @@ String & String::AddStrAt(const String & str, size_t pos)
 	return*this;
 }
 
-//String & String::AddStrAt(const char * str, size_t pos)
-//{
-//	
-//}
+String & String::AddStrAt(const char * str, size_t pos)
+{
+	int tmp_length = length + strlen(str);
+	char*tmp = new char[tmp_length + 1];
+	tmp[tmp_length] = '\0';
+
+	for (int i = 0;i < pos;i++)
+		tmp[i] = this->m_stringRep[i];
+	for (int i = 0;i < strlen(str);i++)
+		tmp[pos + i] = str[i];
+	for (int i = pos;i < this->length;i++)
+		tmp[i + strlen(str)] = this->m_stringRep[i];
+	this->length = tmp_length;
+	delete[] this->m_stringRep;
+	this->m_stringRep = tmp;
+	return*this;
+}
+
+String String::Format(const char * specs, ...)
+{
+	String s(300);
+	char *b;
+	/*b[0] = '\0';*/
+	char buf[100];
+	buf[0] = '\0';
+	va_list arguments;
+	va_start(arguments, specs);
+
+	int ival;
+	double dval;
+
+	for (const char *p = specs; *p ;p++) 					//
+	{
+		*b = *p;
+		b++;
+		if (*p == '%') 									//Если встретится символ %
+		{			
+			switch (*++p) 								//То анализируем следующий за этим симолом символ
+			{
+			case 'd':  ival = va_arg(arguments, int); 			//Если это символ d, то значит параметр int
+			{
+				/*cout << ival << " ";*/
+				_itoa_s(ival, buf, 10);
+				int a = strlen(buf);
+				buf[a] = '\0';
+				strcat(b, buf);
+			}break; 					//Выводим параметр типа int на экран
+			case 'f':  dval = va_arg(arguments, double); 		//Если это символ f значит параметр double
+			{
+				/*_itoa_s(dval, buf, 10);
+				s.ConcatStr(buf);*/
+				sprintf_s(buf, "%f", dval);
+				_itoa_s(ival, buf, 10);
+				int a = strlen(buf);
+				buf[a] = '\0';
+				strcat(b, buf);
+			}break; 					//Выводим параметр типа double на экран
+			}
+		}
+		else cout << *b << " ";
+	}
+	va_end(arguments);
+
+	/*char buf[100];
+	char tmp;
+	int i = 0;
+	while (specs[i]!= '%')
+	{
+		buf[i] = specs[i];
+	}
+	if(specs[i]=='d')
+*/
+	return s;
+}
 
 void String::operator()(const char * str)
 {

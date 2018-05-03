@@ -1,4 +1,5 @@
 #pragma once
+#include <stdarg.h>
 #include "Library.h"
 class String
 {
@@ -21,9 +22,12 @@ public:
 	String& operator+(const char* str);
 	String& AddStrAt(const String& str, size_t pos);
 	String& AddStrAt(const char* str, size_t pos);
+	
+	static String Format(const char* specs, ...);
 
 	void operator()(const char* str);
 
 	virtual ~String();
 };
+
 
